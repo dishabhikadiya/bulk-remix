@@ -4,7 +4,7 @@ import {
   useSubmit,
   useLoaderData,
 } from "@remix-run/react";
-import { Page, Card, Tag, Spinner, Text } from "@shopify/polaris";
+import { Page, Card, Tag, Text } from "@shopify/polaris";
 import { authenticate } from "../shopify.server";
 const token = "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";
 export const loader = async ({ request }) => {
@@ -53,9 +53,7 @@ export default function Index() {
   const generateProduct = () => submit({}, { replace: true, method: "POST" });
   const row = loaderData?.data?.currentBulkOperation;
   console.log(row);
-  if (row) {
-    <Spinner />;
-  }
+  
   return (
     <Page>
       <Card>

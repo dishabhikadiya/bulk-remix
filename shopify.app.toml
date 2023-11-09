@@ -2,7 +2,7 @@
 
 name = "bulk-opretion"
 client_id = "ba5e4c548a6994fea84ca96cecb28a1c"
-application_url = "https://valium-illustration-accurate-slow.trycloudflare.com"
+application_url = "https://org-travelers-initiated-francisco.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,10 +11,10 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://valium-illustration-accurate-slow.trycloudflare.com/auth/callback",
-  "https://valium-illustration-accurate-slow.trycloudflare.com/auth/shopify/callback",
-  "https://valium-illustration-accurate-slow.trycloudflare.com/api/auth/callback",
-  "https://valium-illustration-accurate-slow.trycloudflare.com/.shopify/graphiql/auth/callback"
+  "https://org-travelers-initiated-francisco.trycloudflare.com/auth/callback",
+  "https://org-travelers-initiated-francisco.trycloudflare.com/auth/shopify/callback",
+  "https://org-travelers-initiated-francisco.trycloudflare.com/api/auth/callback",
+  "https://org-travelers-initiated-francisco.trycloudflare.com/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]

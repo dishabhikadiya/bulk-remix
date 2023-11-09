@@ -1,6 +1,6 @@
-import { Box, Button, Page } from "@shopify/polaris";
+import { Box, Button, Link, Page } from "@shopify/polaris";
 import { Step2, Step1, Step3, Step4, csvToJson } from "./api";
-import { useActionData, useSubmit } from "@remix-run/react";
+import { useActionData, useSubmit, useNavigation } from "@remix-run/react";
 import React from "react";
 import { json } from "@remix-run/node";
 import fs from "fs";
@@ -34,7 +34,7 @@ export const action = async ({ request }) => {
       });
       const dataCreate = await Step1();
       console.log(dataCreate);
-      // Only requed data append (Step - 1)
+      // (Step - 1)
       if (dataCreate) {
         const apical = new FormData();
         const dataAPI =
@@ -46,7 +46,7 @@ export const action = async ({ request }) => {
         apical.append("file", jsFile);
         console.log(apical);
         console.log(filses);
-        // Response convert xml to json (Step - 2)
+        // (Step - 2)
         const step2 = await Step2(apical);
         console.log(step2);
         const parseString = require("xml2js").parseString;
@@ -59,14 +59,14 @@ export const action = async ({ request }) => {
           jsonData = result;
         });
         console.log(jsonData);
-        // Bulk Created (Step - 3)
+        // (Step - 3)
         if (jsonData) {
           let key = jsonData?.PostResponse?.Key;
           console.log(key);
           const step3 = await Step3(key);
           console.log(step3);
         }
-        // webhookSubscription (Step - 4)
+        // (Step - 4)
         const step4 = await Step4();
         console.log(step4);
       }
@@ -81,6 +81,7 @@ export const action = async ({ request }) => {
 const bulk = () => {
   const actionData = useActionData();
   console.log(actionData);
+  const nav = useNavigation();
   const submit = useSubmit();
   return (
     <div>
@@ -92,6 +93,8 @@ const bulk = () => {
               Submit
             </Button>
           </form>
+          <br></br>
+          <Button plain>View Uploaded Data</Button>
         </Page>
       </Box>
     </div>

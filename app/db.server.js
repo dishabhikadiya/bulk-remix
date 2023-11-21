@@ -6,8 +6,14 @@ const productSchema = mongoose.Schema({
   status: String,
   vendor: String,
 });
+let Users;
+try {
+  Users = mongoose.model("bulks");
+} catch (error) {
+  Users = mongoose.model("bulks", productSchema);
+}
 
-module.exports = mongoose.model("bulks", productSchema);
+module.exports = Users;
 
 // import { PrismaClient } from "@prisma/client";
 

@@ -1,12 +1,14 @@
 import {
   useActionData,
-  useNavigation,
+  useNavigate,
   useSubmit,
   useLoaderData,
+  Form,
 } from "@remix-run/react";
-import { Page, Card, Tag, Text } from "@shopify/polaris";
+import { Page, Card, Tag, Text, Button } from "@shopify/polaris";
 import { authenticate } from "../shopify.server";
 const token = "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";
+
 export const loader = async ({ request }) => {
   await authenticate.admin(request);
   try {
@@ -38,24 +40,14 @@ export const loader = async ({ request }) => {
     throw error;
   }
 };
-
-export const action = async ({ request }) => {
-  const { admin } = await authenticate.admin(request);
-  return null;
-};
-
 export default function Index() {
-  const nav = useNavigation();
+  const nav = useNavigate();
   const actionData = useActionData();
   const submit = useSubmit();
   const loaderData = useLoaderData();
-  console.log(loaderData);
-  const generateProduct = () => submit({}, { replace: true, method: "POST" });
   const row = loaderData?.data?.currentBulkOperation;
-  console.log(row);
-  
   return (
-    <Page>
+    <Page title="Dashboard">
       <Card>
         <Text variant="headingLg" as="h5">
           Bulk operations Status ...
@@ -65,6 +57,17 @@ export default function Index() {
           Id : {row.id}&nbsp;&nbsp;&nbsp;
           <Tag>{row.status}</Tag>
         </div>
+        <Form method="post" encType="multipart/form-data">
+          <br></br>
+          <Button
+            primary
+            onClick={() => {
+              nav("/app/product");
+            }}
+          >
+            View Product
+          </Button>
+        </Form>
       </Card>
     </Page>
   );

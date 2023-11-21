@@ -35,6 +35,8 @@ module.exports = {
       child_process: true,
       url: true,
       events: true,
+      timers: true,
+      string_decoder: true,
     },
   },
 };

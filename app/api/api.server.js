@@ -1,6 +1,6 @@
 import axios from "axios";
 const token = "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";
-const ngrok = require("ngrok");
+// const ngrok = require("ngrok");
 const csv = require("csvtojson");
 const url =
   "https://appmixo-disha.myshopify.com/admin/api/2023-10/graphql.json";
@@ -118,6 +118,7 @@ export const Step3 = async (temp) => {
       body: data,
     });
     console.log(response);
+    response = await response.json();
     return response;
   } catch (error) {
     console.log(error);
@@ -126,48 +127,48 @@ export const Step3 = async (temp) => {
 };
 
 // STEP - 4 => WebhookSubscriptionCreate
-export const Step4 = async () => {
-  try {
-    let url_nc = await ngrok.connect(3000);
-    console.log(url_nc);
-    let data = JSON.stringify({
-      query: `mutation {
-      webhookSubscriptionCreate(
-        topic: BULK_OPERATIONS_FINISH
-        webhookSubscription: {
-          format: JSON,
-          callbackUrl: "${url_nc}/callbackUrl"}
-      ) {
-        userErrors {
-          field
-          message
-        }
-        webhookSubscription {
-          id
-        }
-      }
-    }`,
-      variables: {},
-    });
-    let config = {
-      method: "post",
-      maxBodyLength: Infinity,
-      url: url,
-      headers: {
-        "X-Shopify-Access-Token": token,
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-    console.log(data);
-    const response = await axios.request(config);
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+// export const Step4 = async () => {
+//   try {
+//     let url_nc = await ngrok.connect(3000);
+//     console.log(url_nc);
+//     let data = JSON.stringify({
+//       query: `mutation {
+//       webhookSubscriptionCreate(
+//         topic: BULK_OPERATIONS_FINISH
+//         webhookSubscription: {
+//           format: JSON,
+//           callbackUrl: "${url_nc}/callbackUrl"}
+//       ) {
+//         userErrors {
+//           field
+//           message
+//         }
+//         webhookSubscription {
+//           id
+//         }
+//       }
+//     }`,
+//       variables: {},
+//     });
+//     let config = {
+//       method: "post",
+//       maxBodyLength: Infinity,
+//       url: url,
+//       headers: {
+//         "X-Shopify-Access-Token": token,
+//         "Content-Type": "application/json",
+//       },
+//       data: data,
+//     };
+//     console.log(data);
+//     const response = await axios.request(config);
+//     console.log(response.data);
+//     return response.data;
+//   } catch (error) {
+//     console.error(error);
+//     throw error;
+//   }
+// };
 
 // CSV convert to json
 export const csvToJson = async (csvFile) => {

@@ -1,7 +1,8 @@
 import axios from "axios";
 const token = "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";
-// const ngrok = require("ngrok");
 const csv = require("csvtojson");
+import { json } from "@remix-run/node";
+import product from "../db.server";
 const url =
   "https://appmixo-disha.myshopify.com/admin/api/2023-10/graphql.json";
 // STEP - 1 => Create Key and Value
@@ -174,4 +175,29 @@ export const Step3 = async (temp) => {
 export const csvToJson = async (csvFile) => {
   console.log("csvFile:", csvFile);
   return await csv().fromString(csvFile);
+};
+
+// Product query
+
+export const DeleteProduct = async (id) => {
+  try {
+    let result = await product.deleteOne({ _id: id });
+    console.log("result", result);
+    return json({ data: result, status: true });
+  } catch (error) {
+    console.log("result", error);
+    return json({ error: "Something went Wrong", status: false });
+  }
+};
+
+export const UpdateProduct = async (id, products) => {
+  try {
+    let result = await product.updateOne({ _id: id }, { $set: products });
+
+    console.log("res", result);
+    return json({ data: result, status: true });
+  } catch (error) {
+    console.log("update error", error);
+    return json({ data: error, status: false });
+  }
 };

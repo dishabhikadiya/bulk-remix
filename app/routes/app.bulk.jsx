@@ -1,19 +1,22 @@
-import { Box, Button, Link, Page } from "@shopify/polaris";
+import {
+  Box,
+  Button,
+  Card,
+  ChoiceList,
+  Text,
+  Page,
+  Spinner,
+} from "@shopify/polaris";
 import { Step2, Step1, Step3, csvToJson } from "../api/api.server";
 import { useActionData, useSubmit, useNavigate, Form } from "@remix-run/react";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { json } from "@remix-run/node";
 import { parseStringPromise } from "xml2js";
 import fs from "fs";
 
-export const loader = () => {
-  return null;
-};
-
 export const action = async ({ request }) => {
   const body = await request.formData();
   console.log(body);
-  // return json({ data: "test" });
   try {
     let filses = body.get("csvFile");
     const content = await filses.text();
@@ -25,10 +28,8 @@ export const action = async ({ request }) => {
       myObject.push(obj);
     });
     let jsonLdata = myObject.map((obj) => JSON.stringify(obj)).join("\n");
-
     let jsonlFileName = "data.jsonl";
     fs.writeFileSync(jsonlFileName, jsonLdata, "utf-8");
-
     console.log("dgf", myObject);
     const fileblob = new Blob([jsonLdata], {
       type: "application/jsonl",
@@ -56,9 +57,9 @@ export const action = async ({ request }) => {
       console.log(step2);
 
       let resp = await parseStringPromise(step2);
-      console.log("resp", resp);
+      console.log("res", resp);
       let key = resp?.PostResponse?.Key[0];
-      console.log("kry", key);
+      console.log("key", key);
       // (Step - 3)
 
       if (key) {
@@ -80,8 +81,6 @@ export const action = async ({ request }) => {
     console.log("error", error);
     return json({ error: "Error" }, { status: 500 });
   }
-
-  // return null;
 };
 
 const bulk = () => {
@@ -89,22 +88,27 @@ const bulk = () => {
   console.log(actionData);
   const nav = useNavigate();
   const submit = useSubmit();
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     console.log("object", actionData);
     if (actionData) {
-      console.warn("actionDasdfsdfhgdfta", actionData);
+      console.log("actionData", actionData);
+      setLoader(false);
     }
   }, [actionData]);
-
   return (
     <div>
-      <Box>
-        <Page>
+      <Page>
+        <Text variant="headingLg" as="h5">
+          Bulk Upload
+        </Text>
+        <br />
+        <Card>
           <Form encType="multipart/form-data" method="POST">
             <input type="file" name="csvFile" />
-            <Button primary submit>
-              Submit
+            <Button primary submit onClick={() => setLoader(true)}>
+              {loader ? <Spinner size="small" /> : "Submit"}
             </Button>
           </Form>
           <br></br>
@@ -115,8 +119,8 @@ const bulk = () => {
           >
             View Uploaded Data Status
           </Button>
-        </Page>
-      </Box>
+        </Card>
+      </Page>
     </div>
   );
 };

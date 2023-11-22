@@ -1,5 +1,5 @@
 import { useActionData, useSubmit } from "@remix-run/react";
-import { Button, Page, Spinner } from "@shopify/polaris";
+import { Button, Page } from "@shopify/polaris";
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import {
@@ -13,7 +13,7 @@ import { DataTable } from "@shopify/polaris";
 import product from "../db.server";
 import { useState, useCallback, useEffect } from "react";
 import { DeleteProduct, UpdateProduct } from "~/api/api.server";
-import { Frame, Modal, TextContainer, Spinner } from "@shopify/polaris";
+import { Frame, Modal, TextContainer } from "@shopify/polaris";
 export const loader = async ({ request }) => {
   await authenticate.admin(request);
   let data = await product.find();
@@ -53,14 +53,12 @@ export default function Index() {
   const Loaderdata = useLoaderData();
   const [deleteid, setDeleteid] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [loader, setLoader] = useState(false);
   console.log(Loaderdata);
   useEffect(() => {
     console.log("object", actionData);
     if (actionData) {
       console.log("actionData", actionData);
       setActiv1(false);
-      setLoader(false);
     }
   }, [actionData]);
   const handleDelete = () => {
@@ -177,7 +175,7 @@ export default function Index() {
             <br />
             <br />
             <Button primary onClick={handleDelete}>
-              {loader ? <Spinner size="small" /> : "Remove"}
+              Remove
             </Button>
             &nbsp;
             <Button onClick={handleChange1}>Cancal</Button>

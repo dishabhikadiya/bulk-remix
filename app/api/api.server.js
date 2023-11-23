@@ -201,3 +201,23 @@ export const UpdateProduct = async (id, products) => {
     return json({ data: error, status: false });
   }
 };
+
+// searching
+
+export const Searching = async (filter, key) => {
+  switch (filter) {
+    case "Search":
+      try {
+        let result = await product.find({
+          $or: [{ title: { $regex: key, $options: "i" } }],
+        });
+        console.log("result", result);
+        return { data: result, status: true, flage: true };
+      } catch (error) {
+        console.log("result", error);
+        return { error: "Wrong", status: false };
+      }
+    default:
+      return { error: "Wrong", status: false };
+  }
+};

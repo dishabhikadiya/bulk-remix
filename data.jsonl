@@ -1,7 +1,5 @@
-{"input":{"title":"a","productType":"test","vendor":"Alphaa"}}
-{"input":{"title":"b","productType":"test","vendor":"Alphaa"}}
-{"input":{"title":"c","productType":"test","vendor":"Alphaa"}}
-{"input":{"title":"d","productType":"test","vendor":"Alphaa"}}
-{"input":{"title":"z","productType":"test","vendor":"Alphaa"}}
-{"input":{"title":"x","productType":"test","vendor":"Alphaa"}}
-{"input":{"title":"c","productType":"test","vendor":"Alphaa"}}
+{"input":{"title":"1","productType":"testing","vendor":"disha"}}
+{"input":{"title":"2","productType":"testing","vendor":"disha"}}
+{"input":{"title":"3","productType":"testing","vendor":"disha"}}
+{"input":{"title":"4","productType":"testing","vendor":"disha"}}
+{"input":{"title":"5","productType":"testing","vendor":"disha"}}

@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx","**/*.jsx", "app/api/api.server.js"],
+  "include": ["**/*.ts", "**/*.tsx","**/*.jsx", "app/api/api.server.js", "app/routes/app.chart.jsx"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "strict": true,

@@ -221,3 +221,16 @@ export const Searching = async (filter, key) => {
       return { error: "Wrong", status: false };
   }
 };
+
+// Data Save
+
+export const AddProduct = async (Product) => {
+  try {
+    const data = new product(Product);
+    let res = await data.save();
+    return json({ data: res, status: true });
+  } catch (error) {
+    console.log("result", error);
+    return json({ error: "Something went Wrong", status: false });
+  }
+};

@@ -2,19 +2,19 @@
 
 name = "bulk-opretion"
 client_id = "ba5e4c548a6994fea84ca96cecb28a1c"
-application_url = "https://belgium-residents-macromedia-soldier.trycloudflare.com"
+application_url = "https://producers-shows-mid-might.trycloudflare.com"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "write_products,read_products,read_checkouts"
 
 [auth]
 redirect_urls = [
-  "https://belgium-residents-macromedia-soldier.trycloudflare.com/auth/callback",
-  "https://belgium-residents-macromedia-soldier.trycloudflare.com/auth/shopify/callback",
-  "https://belgium-residents-macromedia-soldier.trycloudflare.com/api/auth/callback",
-  "https://belgium-residents-macromedia-soldier.trycloudflare.com/.shopify/graphiql/auth/callback"
+  "https://producers-shows-mid-might.trycloudflare.com/auth/callback",
+  "https://producers-shows-mid-might.trycloudflare.com/auth/shopify/callback",
+  "https://producers-shows-mid-might.trycloudflare.com/api/auth/callback",
+  "https://producers-shows-mid-might.trycloudflare.com/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]
